@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <h2>Login Page</h2>
+    <label>Email:</label>
+    <input type="text" id="email"><br><br>
+
+     <label>Password:</label>
+    <input type="password" id="password"><br><br>
+
+    <button onclick="login()">Login</button>
+
+    <script>
+        function login(){
+            var email = 
+            document.getElementById("email").value;
+            var password = 
+            document.getElementById("password").value;
+
+            if(email === "admin@gmail.com" && 
+                password === "admin1234"){
+                    alert("Login success");
+                    window.location="admin.html";
+                }else{
+                    alert("Wrong email or password");
+                }
+                    
+                }
+            
+        
+    </script>
+
+
+</body>
+</html>
