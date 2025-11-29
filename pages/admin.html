@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: Arial;
+            background: #f7f7f7;
+            display: flex;
+            flex-direction:column;
+            height: 100vh;
+        }
+        /* Navbar */
+        #navbar{
+            background:#333;
+            color:white;
+            padding: 15px;
+            font-size: 20px;
+        }
+        #container{
+            display: flex;
+            height: 100%;
+        }
+        #sidebar{
+            width: 250px;
+            background: #fff;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+        input,select{
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 10px;
+        }
+        button{
+            width:100%;
+            padding: 10px;
+            background: blue;
+            color: white;
+            border:none;
+            cursor: pointer;
+
+        }
+        #main{
+            flex:1;
+            padding: 20px;
+            display:flex;
+            flex-wrap: wrap;
+            gap:15px;
+        }
+        .card{
+            width:30%;
+            background: white;
+            padding:15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px gray;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        Admin Dashboard
+    </div>
+    <div id="container">
+        <!-- Sidebar Form -->
+         <div id ="sidebar">
+            <h3>Add Fleet</h3>
+            <input type="text" id="reg" placeholder="Reg No. of Vehicle">
+            <select id ="category">
+                <option value="">Select Category</option>
+                <option>Auto</option>
+                <option>Car</option>
+                <option>Truck</option>
+                <option>Bus</option>
+            </select>
+            <input type="text" id="driver"placeholder="Driver Name">
+            <select id="avail">
+                <option value="">Availability </option>
+                <option>Available</option>
+                <option>Unavailable</option>
+            </select>
+            <button onclick="addFleet()">Add Fleet</button>
+         </div>
+         <!-- Main cards -->
+          <div id="main"></div>
+
+    </div>
+    <script>
+        function addFleet(){
+            let reg = document.getElementById("reg").value;
+            let cat = document.getElementById("category").value;
+            let driver = document.getElementById("driver").value;
+            let avail = document.getElementById("avail").value;
+
+            if(reg ==="" || cat==="" || driver===""|| avail ===""){
+                alert("All fields are required");
+                return;
+            }
+            let card= document.createElement("div");
+            card.className = "card";
+            card.innerHtml = `<img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" style ="width:100%;
+            height:120px;border-radius:5px;">
+            <h4>Reg No: ${reg}</h4>
+            <p>Category:${cat}</p>
+            <p>Driver:<span class="status">${avail}</span></p>
+            <button class ="btn-update"
+            onclick="updateDriver(this)">Update Driver </button>
+            <button class = "btn-change"onclick="changeStatus(this)">Change Availability</button>
+            <button class = "btn-delete"onclick="deleteCard(this)">Delete Vehicle </button>`;
+
+               
+               document.getElementById("main").appendChild(card);    
+               //clear form 
+               document.getElementById("reg").value="";
+               document.getElementById("category").value="";  
+                document.getElementById("driver").value=""; 
+                 document.getElementById("avail").value="";   
+
+                 }
+                 function updateDriver(btn){
+                    let newDriver = prompt("enter new driver name:");
+                    if(newDriver){
+                        btn.parentElement.querySelector(".driverName").innerText = newDriver;
+                    }
+                 }
+                 function changeStatus(btn){
+                    let status = 
+                    btn.parentElement.querySelector(".status");
+                    status.innerText=status.innerText === "Available"? "Unavailable": "Available";
+                 }
+                 function deleteCard(btn){
+                    btn.parentElement.remove();
+                 }
+    </script>
+</body>
+</html>
